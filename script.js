@@ -16,7 +16,7 @@ const GROUPS_CONFIG = {
   3: { name: 'Kelompok 3 — INOHONG', shortName: 'INOHONG', facilitator: 'Radhwa Fadya Prameswari', password: 'KOLABORASI83' },
   4: { name: 'Kelompok 4 — WIDYA', shortName: 'WIDYA', facilitator: 'Khansa Angelina Athaya', password: 'PANCASILA46' },
   5: { name: 'Kelompok 5 — PANGESTU', shortName: 'PANGESTU', facilitator: 'Benafatin Wiradni Badawi', password: 'SOLIDARITAS79' },
-  6: { name: 'Kelompok 6 — JAWARA', shortName: 'JAWARA', facilitator: 'Arya Fadhlal Izzati Wijaya', password: 'PATRIOTISME35' }
+  6: { name: 'Kelompok 6 — JAWARA', shortName: 'JAWARA', facilitator: 'Muhammad Dani', password: 'PATRIOTISME35' }
 };
 
 const ADMIN_PASSWORD = 'KARSA94ADMIN28';
@@ -198,6 +198,7 @@ function createDefaultData() {
     announcement: '',
     driveUrl: 'https://drive.google.com/',
     timeline: JSON.parse(JSON.stringify(TIMELINE_DEFAULT)),
+    brankasUnlocked: false,
     groups: {}
   };
   for (let i = 1; i <= 6; i++) {
@@ -220,30 +221,19 @@ function createDefaultData() {
   return data;
 }
 
-let memoryStorage = null;
-
 function initData() {
-  let existing = null;
-  try {
-    existing = localStorage.getItem(STORAGE_KEY);
-  } catch (e) {
-    existing = memoryStorage;
-  }
-
+  const existing = localStorage.getItem(STORAGE_KEY);
   if (!existing) {
     const def = createDefaultData();
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(def));
-    } catch (e) {
-      memoryStorage = JSON.stringify(def);
-    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(def));
     return def;
   }
   try {
-    const parsed = typeof existing === 'string' ? JSON.parse(existing) : existing;
+    const parsed = JSON.parse(existing);
     let updated = false;
     if (!parsed.groups) { parsed.groups = {}; updated = true; }
     if (parsed.bgImage === undefined) { parsed.bgImage = ''; updated = true; }
+    if (parsed.brankasUnlocked === undefined) { parsed.brankasUnlocked = false; updated = true; }
     if (!parsed.timeline || !Array.isArray(parsed.timeline)) { parsed.timeline = JSON.parse(JSON.stringify(TIMELINE_DEFAULT)); updated = true; }
     for (let i = 1; i <= 6; i++) {
       const gid = String(i);
@@ -275,19 +265,10 @@ function initData() {
         }
       }
     }
-    if (updated) {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
-      } catch (e) {
-        memoryStorage = JSON.stringify(parsed);
-      }
-    }
+    if (updated) localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
     return parsed;
   } catch (e) {
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch (err) {}
-    memoryStorage = null;
+    localStorage.removeItem(STORAGE_KEY);
     return initData();
   }
 }
@@ -295,9 +276,9 @@ function initData() {
 function getData() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : (memoryStorage ? JSON.parse(memoryStorage) : initData());
+    return raw ? JSON.parse(raw) : initData();
   } catch (e) {
-    return memoryStorage ? JSON.parse(memoryStorage) : initData();
+    return initData();
   }
 }
 
@@ -305,7 +286,6 @@ function saveData(data, skipCloud) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   } catch (e) {
-    memoryStorage = JSON.stringify(data);
     showToast('Gagal menyimpan ke penyimpanan lokal browser.', 'error');
   }
 
@@ -375,12 +355,6 @@ function initFirebase() {
   }
 }
 
-function applyBgFromData(data) {
-  if (data && data.bgImage) {
-    document.documentElement.style.setProperty('--custom-bg-image', `url("${data.bgImage}")`);
-  }
-}
-
 function updateCloudStatusUI(connected, label) {
   cloudSyncActive = connected;
   const badges = [document.getElementById('dash-cloud-badge'), document.getElementById('admin-cloud-badge')];
@@ -411,17 +385,9 @@ function refreshCurrentView() {
 }
 
 function login(password) {
-  const errBox = document.getElementById('login-error');
-  if (!password || !password.trim()) {
-    if (errBox) {
-      errBox.style.display = 'flex';
-      const msg = errBox.querySelector('p');
-      if (msg) msg.textContent = 'Silakan ketik kata sandi terlebih dahulu.';
-    }
-    showToast('Ketik kata sandi terlebih dahulu!', 'error');
-    return false;
-  }
+  if (!password) return false;
   const clean = password.trim().toUpperCase();
+  const errBox = document.getElementById('login-error');
 
   if (clean === ADMIN_PASSWORD) {
     currentUser = { type: 'admin', groupId: null };
@@ -720,6 +686,7 @@ function renderAdmin() {
   }
 
   renderAdminGameMonitor();
+  updateAdminBrankasToggleUI(data);
 }
 
 function switchAdminTab(tabIndex) {
@@ -958,6 +925,38 @@ function adminSaveDriveUrl() {
 
 
 
+function updateAdminBrankasToggleUI(data) {
+  const card = document.getElementById('admin-brankas-toggle-card');
+  const label = document.getElementById('admin-brankas-status-label');
+  const btn = document.getElementById('btn-toggle-brankas-access');
+  if (!card || !label || !btn) return;
+
+  const isUnlocked = !!data.brankasUnlocked;
+  if (isUnlocked) {
+    card.classList.add('access-open');
+    label.textContent = 'Status Akses Brankas: Terbuka (Peserta Dapat Mengakses)';
+    btn.className = 'btn btn-danger';
+    btn.innerHTML = `${SVG.lock}<span>Kunci Kembali Akses Brankas</span>`;
+  } else {
+    card.classList.remove('access-open');
+    label.textContent = 'Status Akses Brankas: Terkunci (Peserta Belum Dapat Mengakses)';
+    btn.className = 'btn btn-primary';
+    btn.innerHTML = `${SVG.unlock}<span>Buka Akses Brankas untuk Peserta</span>`;
+  }
+}
+
+function adminToggleBrankasAccess() {
+  const data = getData();
+  data.brankasUnlocked = !data.brankasUnlocked;
+  saveData(data);
+  updateAdminBrankasToggleUI(data);
+  if (data.brankasUnlocked) {
+    showToast('Akses Brankas Resolusi Konflik berhasil DIBUKA untuk seluruh peserta!', 'success');
+  } else {
+    showToast('Akses Brankas Resolusi Konflik berhasil DIKUNCI kembali.', 'info');
+  }
+}
+
 function renderAdminGameMonitor() {
   const tbody = document.getElementById('game-monitor-body');
   if (!tbody) return;
@@ -1151,12 +1150,43 @@ function showGame(groupId) {
   }
   showPage('page-game');
 
+  if (!data.brankasUnlocked) {
+    showLockedGame(groupId);
+    return;
+  }
+
   if (gp.themeUnlocked) {
     showFinalTheme(groupId);
   } else if (gp.stage1) {
     showStage2(groupId);
   } else {
     showStage1(groupId);
+  }
+}
+
+function showLockedGame(groupId) {
+  const container = document.getElementById('game-content');
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="card game-card game-locked-card">
+      <div class="game-locked-icon">
+        ${SVG.lock}
+      </div>
+      <h3 class="game-locked-title">Akses Penugasan Belum Dibuka</h3>
+      <p class="game-locked-desc">
+        Silakan menunggu instruksi resmi dari Panitia untuk memulai penyelesaian Brankas Resolusi Konflik.
+      </p>
+      <button id="btn-locked-back-dash" class="btn btn-primary" style="margin-top:24px;">
+        ${SVG.arrowRight}
+        Kembali ke Dashboard Kelompok
+      </button>
+    </div>
+  `;
+
+  const backBtn = document.getElementById('btn-locked-back-dash');
+  if (backBtn) {
+    backBtn.addEventListener('click', backToDashboard);
   }
 }
 
@@ -1523,6 +1553,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnSaveDrv = document.getElementById('btn-save-drive');
   if (btnSaveDrv) btnSaveDrv.addEventListener('click', adminSaveDriveUrl);
 
+  const btnToggleBrankas = document.getElementById('btn-toggle-brankas-access');
+  if (btnToggleBrankas) {
+    btnToggleBrankas.addEventListener('click', adminToggleBrankasAccess);
+  }
+
   const adminMembersContainer = document.getElementById('admin-members-container');
   if (adminMembersContainer) {
     adminMembersContainer.addEventListener('click', (e) => {
@@ -1592,6 +1627,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const rstAllBtn = e.target.closest('#btn-reset-all-games');
     if (rstAllBtn) {
       adminResetAllGames();
+    }
+
+    const toggleBrankasBtn = e.target.closest('#btn-toggle-brankas-access');
+    if (toggleBrankasBtn) {
+      adminToggleBrankasAccess();
     }
 
     const themeBackBtn = e.target.closest('#btn-theme-back-dash');

@@ -1436,3 +1436,72 @@ textarea.input-field {
 .cloud-status-pill.error .cloud-status-dot {
   background: var(--danger);
 }
+.admin-brankas-toggle-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+  border: 2px solid #F59E0B;
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.admin-brankas-toggle-card.access-open {
+  background: linear-gradient(135deg, #D1FAE5, #A7F3D0);
+  border-color: #10B981;
+}
+.admin-brankas-toggle-info {
+  flex: 1;
+  min-width: 200px;
+}
+.admin-brankas-toggle-label {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #92400E;
+  margin-bottom: 4px;
+}
+.admin-brankas-toggle-card.access-open .admin-brankas-toggle-label {
+  color: #065F46;
+}
+.admin-brankas-toggle-desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #78350F;
+}
+.admin-brankas-toggle-card.access-open .admin-brankas-toggle-desc {
+  color: #047857;
+}
+.game-locked-card {
+  text-align: center;
+  padding: 48px 24px;
+}
+.game-locked-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.game-locked-icon .icon-svg {
+  width: 36px;
+  height: 36px;
+  color: #64748B;
+}
+.game-locked-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #334155;
+  margin-bottom: 10px;
+}
+.game-locked-desc {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #64748B;
+  max-width: 480px;
+  margin: 0 auto;
+}
