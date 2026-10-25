@@ -338,7 +338,6 @@ function initFirebase() {
         const cloudData = doc.data();
         if (cloudData && cloudData.groups) {
           saveData(cloudData, true);
-          applyBgFromData(cloudData);
           updateCloudStatusUI(true, 'Cloud Real-Time Aktif');
           refreshCurrentView();
         }
@@ -352,6 +351,12 @@ function initFirebase() {
     });
   } catch (err) {
     updateCloudStatusUI(false, 'Mode Lokal');
+  }
+}
+
+function applyBgFromData(data) {
+  if (data && data.bgImage) {
+    document.documentElement.style.setProperty('--custom-bg-image', `url("${data.bgImage}")`);
   }
 }
 
@@ -385,9 +390,17 @@ function refreshCurrentView() {
 }
 
 function login(password) {
-  if (!password) return false;
-  const clean = password.trim().toUpperCase();
   const errBox = document.getElementById('login-error');
+  if (!password || !password.trim()) {
+    if (errBox) {
+      errBox.style.display = 'flex';
+      const msg = errBox.querySelector('p');
+      if (msg) msg.textContent = 'Silakan ketik kata sandi resmi terlebih dahulu.';
+    }
+    showToast('Ketik kata sandi terlebih dahulu!', 'error');
+    return false;
+  }
+  const clean = password.trim().toUpperCase();
 
   if (clean === ADMIN_PASSWORD) {
     currentUser = { type: 'admin', groupId: null };
@@ -1450,11 +1463,20 @@ window.addEventListener('storage', (e) => {
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+function bootApp() {
   const initialData = initData();
   applyBgFromData(initialData);
   initFirebase();
   showPage('page-login');
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootApp);
+} else {
+  bootApp();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
 
   const btnLogin = document.getElementById('btn-login');
   const pwdInput = document.getElementById('password-input');
@@ -1725,3 +1747,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+window.login = login;
+window.logout = logout;
+window.showPage = showPage;
+window.backToDashboard = backToDashboard;
+window.adminToggleBrankasAccess = adminToggleBrankasAccess;
