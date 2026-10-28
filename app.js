@@ -27,9 +27,9 @@ const TIMELINE_DEFAULT = [
   { name: 'Penugasan Pertama — Silih Asih', date: 'Coming Soon', status: 'upcoming' },
   { name: 'Penugasan Kedua — Silih Asah', date: 'Coming Soon', status: 'upcoming' },
   { name: 'Penugasan Terakhir — Silih Asuh', date: 'Coming Soon', status: 'upcoming' },
-  { name: 'Evaluasi Tertulis', date: 'Coming Soon', status: 'upcoming' },
+  { name: 'Tes Tulis', date: 'Coming Soon', status: 'upcoming' },
   { name: 'Sesi Wawancara', date: 'Coming Soon', status: 'upcoming' },
-  { name: 'Pengumuman Akhir', date: '14 Desember 2026', status: 'upcoming' }
+  { name: 'Pengumuman Akhir', date: 'Coming Soon', status: 'upcoming' }
 ];
 
 const GAME_THEMES = {
@@ -362,7 +362,19 @@ function initData() {
     if (!parsed.groups) { parsed.groups = {}; updated = true; }
     if (parsed.bgImage === undefined) { parsed.bgImage = ''; updated = true; }
     if (parsed.brankasUnlocked === undefined) { parsed.brankasUnlocked = false; updated = true; }
-    if (!parsed.timeline || !Array.isArray(parsed.timeline)) { parsed.timeline = JSON.parse(JSON.stringify(TIMELINE_DEFAULT)); updated = true; }
+    if (!parsed.timeline || !Array.isArray(parsed.timeline)) {
+      parsed.timeline = JSON.parse(JSON.stringify(TIMELINE_DEFAULT));
+      updated = true;
+    } else {
+      if (parsed.timeline[5] && parsed.timeline[5].name !== 'Tes Tulis') {
+        parsed.timeline[5].name = 'Tes Tulis';
+        updated = true;
+      }
+      if (parsed.timeline[7] && parsed.timeline[7].date !== 'Coming Soon') {
+        parsed.timeline[7].date = 'Coming Soon';
+        updated = true;
+      }
+    }
     for (let i = 1; i <= 6; i++) {
       const gid = String(i);
       const def = DEFAULT_GROUPS_DATA[i];
@@ -610,7 +622,7 @@ function renderDashboard(groupId) {
   if (facProfEl) facProfEl.textContent = config.facilitator;
 
   renderAnnouncement(data);
-  renderCountdown();
+  updateDashboardBrankasCard(data);
   renderTimeline(data);
   renderLeaderboard(data);
   renderPointHistory(data, groupId);
@@ -644,14 +656,33 @@ function renderAnnouncement(data) {
   }
 }
 
-function renderCountdown() {
-  const numEl = document.getElementById('countdown-days');
-  if (!numEl) return;
-  const target = new Date(2026, 11, 14);
-  const now = new Date();
-  const diff = target.getTime() - now.getTime();
-  const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-  numEl.textContent = days > 0 ? days : 0;
+function renderCountdown() {}
+
+function updateDashboardBrankasCard(data) {
+  const badge = document.getElementById('dash-brankas-status-badge');
+  const text = document.getElementById('dash-brankas-status-text');
+  const btnLabel = document.getElementById('btn-open-game-main-label');
+  if (!badge || !text) return;
+
+  const gid = currentGroupId ? String(currentGroupId) : (currentUser && currentUser.groupId ? String(currentUser.groupId) : '1');
+  const grp = data && data.groups ? data.groups[gid] : null;
+  const isSolved = grp && grp.gameProgress && grp.gameProgress.stage2Solved;
+  const isUnlocked = Boolean(data && data.brankasUnlocked);
+
+  badge.className = 'game-status-badge';
+  if (isSolved) {
+    badge.classList.add('status-solved');
+    text.textContent = 'Misi Selesai — Tema Akhir Terbuka';
+    if (btnLabel) btnLabel.textContent = 'Lihat Lembar Tema Akhir';
+  } else if (isUnlocked) {
+    badge.classList.add('status-unlocked');
+    text.textContent = 'Akses Misi Terbuka — Siap Dikerjakan';
+    if (btnLabel) btnLabel.textContent = 'Mulai Kerjakan Misi';
+  } else {
+    badge.classList.add('status-locked');
+    text.textContent = 'Akses Menunggu Instruksi Resmi Panitia';
+    if (btnLabel) btnLabel.textContent = 'Buka Misi Brankas Resolusi';
+  }
 }
 
 function renderTimeline(data) {
@@ -1651,6 +1682,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnGameMenu = document.getElementById('btn-game-menu');
   if (btnGameMenu) {
     btnGameMenu.addEventListener('click', () => {
+      if (currentUser && currentUser.groupId) {
+        showGame(currentUser.groupId);
+      }
+    });
+  }
+
+  const btnOpenGameMain = document.getElementById('btn-open-game-main');
+  if (btnOpenGameMain) {
+    btnOpenGameMain.addEventListener('click', () => {
       if (currentUser && currentUser.groupId) {
         showGame(currentUser.groupId);
       }

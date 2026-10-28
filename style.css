@@ -584,37 +584,50 @@ textarea.input-field {
   margin: 0 auto;
   line-height: 1.6;
 }
-.countdown-card {
-  background: linear-gradient(135deg, var(--cerulean), #0369A1, var(--deep-slate));
-  color: #fff;
-  text-align: center;
-  border: none;
+.game-entry-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.countdown-card:hover {
-  transform: none;
+.game-entry-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
 }
-.countdown-inner {
-  padding: 8px 0;
+.game-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 9999px;
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--cerulean);
 }
-.countdown-number {
-  font-family: var(--font-mono);
-  font-size: clamp(3rem, 8vw, 4.5rem);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.03em;
+.game-status-badge.status-locked {
+  background: rgba(148, 163, 184, 0.12);
+  border-color: rgba(148, 163, 184, 0.25);
+  color: var(--slate-muted);
 }
-.countdown-label {
-  font-size: 0.95rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  margin-top: 8px;
-  opacity: 0.9;
+.game-status-badge.status-unlocked {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.25);
+  color: var(--emerald);
 }
-.countdown-subtitle {
-  font-size: 0.78rem;
-  margin-top: 12px;
-  opacity: 0.7;
+.game-status-badge.status-solved {
+  background: rgba(217, 119, 6, 0.1);
+  border-color: rgba(217, 119, 6, 0.25);
+  color: var(--gold);
+}
+.status-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 6px currentColor;
 }
 .download-card .text-muted {
   margin-bottom: 16px;

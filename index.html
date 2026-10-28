@@ -99,11 +99,22 @@
           <div id="announcement-content"></div>
         </div>
 
-        <div class="card countdown-card">
-          <div class="countdown-inner">
-            <div class="countdown-number mono-font" id="countdown-days">0</div>
-            <div class="countdown-label">HARI LAGI</div>
-            <div class="countdown-subtitle">Menuju Pengumuman Akhir &mdash; 14 Desember 2026</div>
+        <div class="card game-entry-card" id="card-game-entry">
+          <div class="card-header">
+            <div class="card-icon icon-gold">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <h3 class="card-title">Brankas Resolusi Konflik OSIS</h3>
+          </div>
+          <div class="game-entry-body">
+            <div id="dash-brankas-status-badge" class="game-status-badge">
+              <span class="status-indicator-dot"></span>
+              <span id="dash-brankas-status-text">Akses Menunggu Instruksi Panitia</span>
+            </div>
+            <button id="btn-open-game-main" class="btn btn-gold w-full" type="button">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span id="btn-open-game-main-label">Buka Misi Brankas Resolusi</span>
+            </button>
           </div>
         </div>
 
@@ -114,9 +125,6 @@
             </div>
             <h3 class="card-title">Google Drive Open Recruitment OSIS 2027/2028</h3>
           </div>
-          <p class="text-muted" style="margin-bottom:16px; font-size:0.88rem;">
-            Akses folder resmi berisi dokumen administrasi, template lembar kerja, dan materi kegiatan seleksi.
-          </p>
           <a id="btn-drive-link" class="btn btn-primary w-full" href="#" target="_blank" rel="noopener">
             <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             Google Drive Open Recruitment OSIS 2027/2028
@@ -373,7 +381,7 @@
               <option value="3">Tahap 3: Penugasan Pertama &mdash; Silih Asih</option>
               <option value="4">Tahap 4: Penugasan Kedua &mdash; Silih Asah</option>
               <option value="5">Tahap 5: Penugasan Terakhir &mdash; Silih Asuh</option>
-              <option value="6">Tahap 6: Evaluasi Tertulis</option>
+              <option value="6">Tahap 6: Tes Tulis</option>
               <option value="7">Tahap 7: Sesi Wawancara</option>
               <option value="8">Tahap 8: Pengumuman Akhir</option>
             </select>
