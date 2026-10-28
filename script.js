@@ -34,28 +34,28 @@ const TIMELINE_DEFAULT = [
 
 const GAME_THEMES = {
   1: {
-    title: 'Kesehatan Mental & Academic Burnout Pelajar',
-    desc: 'Manajemen stres akademik, adaptasi beban belajar, dan penguatan kesejahteraan emosional pelajar di lingkungan sekolah.'
+    title: 'Pulau Jawa',
+    desc: 'Pulau Jawa merupakan pulau terpadat dan tersibuk yang menjadi pusat perputaran aktivitas ekonomi, pemerintahan, serta dinamika sejarah di Indonesia. Di balik ritme kehidupannya yang serba cepat dan modern, Pulau Jawa menyimpan akar peradaban kuno yang sangat kuat—mulai dari kemegahan candi-candi bersejarah hingga tradisi keraton yang masih lestari. Masyarakat di pulau ini dikenal luas dengan filosofi hidup yang menjunjung tinggi tata krama (unggah-ungguh), keselarasan sosial, ketekunan bekerja, serta kemampuan beradaptasi di tengah perubahan zaman.'
   },
   2: {
-    title: 'Etika Digital, Cyberbullying, & Fenomena Brainrot',
-    desc: 'Literasi informasi kritis, pencegahan perundungan siber, dan navigasi konten digital yang sehat bagi remaja masa kini.'
+    title: 'Pulau Sumatera',
+    desc: 'Dijuluki sejak zaman kuno sebagai Swarnadwipa atau "Pulau Emas", Sumatera adalah gerbang barat Nusantara yang sangat kaya akan hasil bumi, bentang alam vulkanik, dan sejarah jalur perdagangan dunia. Keberagaman budaya di pulau ini melahirkan masyarakat dengan karakter yang tegas, ekspresif, berani, dan menjunjung tinggi kehormatan adat. Mulai dari tradisi merantau untuk menuntut ilmu dan pengalaman, arsitektur rumah adat yang tahan gempa, hingga kekayaan kuliner rempahnya, Sumatera mencerminkan semangat kemandirian dan ketangguhan hidup.'
   },
   3: {
-    title: 'Krisis Sampah Plastik & Ekologi Lingkungan Sekolah',
-    desc: 'Inovasi circular economy, sistem pemilahan sampah terintegrasi, dan pembiasaan budaya zero-waste di seluruh lingkungan Al Muslim.'
+    title: 'Pulau Kalimantan',
+    desc: 'Sebagai salah satu pulau terbesar di dunia, Kalimantan adalah jantung keanekaragaman hayati Indonesia yang dibelah oleh sungai-sungai raksasa dan hutan hujan tropis tertua di bumi. Kehidupan masyarakat di Kalimantan—baik budaya pedalaman maupun pesisir sungai—berpusat pada hubungan yang sangat erat dan penuh hormat terhadap alam. Berbagai tradisi, hukum adat, hingga mitos penjagaan hutan di pulau ini bukan sekadar cerita turun-temurun, melainkan pedoman hidup bijaksana agar manusia tidak serakah dan selalu menjaga keseimbangan ekosistem.'
   },
   4: {
-    title: 'Lunturnya Budaya Lokal & Nasional di Kalangan Gen-Z',
-    desc: 'Revitalisasi kearifan lokal Sunda dan nilai Pancasila melalui pendekatan multimedia modern, fesyen, dan seni kontemporer.'
+    title: 'Pulau Sulawesi',
+    desc: 'Memiliki bentuk geografis unik menyerupai huruf \'K\', Pulau Sulawesi adalah rumah bagi para pelaut ulung dan penjelajah samudra yang telah mengarungi lautan Nusantara hingga mancanegara selama berabad-abad. Selain filosofi ketangguhan menerjang ombak yang tercermin dari warisan kapal Pinisi, Sulawesi juga menyimpan tradisi daratan yang sangat khas dan sakral. Mulai dari budaya penghormatan leluhur di dataran tinggi hingga keterbukaan masyarakat pesisirnya, pulau ini mengajarkan nilai keberanian, solidaritas yang tinggi, serta kesetiaan pada akar budaya.'
   },
   5: {
-    title: 'Pencegahan Perundungan (Bullying) & Ruang Aman Sekolah',
-    desc: 'Pembangunan mekanisme pelaporan aman, konseling sebaya yang suportif, dan edukasi empati kolektif tanpa diskriminasi.'
+    title: 'Pulau Bali',
+    desc: 'Pulau Bali dikenal luas hingga ke penjuru dunia sebagai pusat keindahan alam, seni ukir, tari, dan arsitektur yang sangat khas. Namun, kekuatan utama Bali sesungguhnya terletak pada keteguhan masyarakatnya dalam mempertahankan identitas budaya di tengah derasnya arus modernisasi global. Seluruh tatanan hidup masyarakat di pulau ini—mulai dari tata ruang bangunan, sistem pengairan sawah tradisional (Subak), hingga aturan sosialnya—berakar pada filosofi menjaga keharmonisan hubungan antara manusia dengan Tuhan, sesama manusia, dan alam sekitar.'
   },
   6: {
-    title: 'Apatisme Siswa terhadap Organisasi & Regenerasi Kepemimpinan',
-    desc: 'Reformasi partisipasi siswa, transparansi aspirasi, dan inkubator kepemimpinan transformatif OSIS yang inklusif.'
+    title: 'Pulau Papua',
+    desc: 'Terletak di ujung paling timur Indonesia, Pulau Papua adalah tanah dengan bentang alam paling menakjubkan sekaligus ekstrem—mulai dari puncak pegunungan bersalju abadi hingga perairan laut dengan terumbu karang terkaya di dunia. Dihuni oleh ratusan suku dengan bahasa daerah yang beragam, masyarakat Papua memiliki ikatan persaudaraan komunal yang sangat erat serta rasa syukur yang mendalam terhadap alam. Kearifan lokal dan tradisi adat di tanah Papua menyimpan pesan kuat tentang kesederhanaan, ketulusan, dan cara menjaga kemurnian alam warisan leluhur.'
   }
 };
 
@@ -193,6 +193,129 @@ function normalizeAnswer(str) {
   return String(str).trim().toUpperCase().replace(/\s+/g, ' ');
 }
 
+const DEFAULT_GROUPS_DATA = {
+  1: {
+    leader: 'Ibnu Saddam Al malik XI.B',
+    members: [
+      'Naufa Rizqiyani Putri (XI.B)',
+      'Callysta Zhafirah Almirashanti (XI.C)',
+      'Naila Nurul Hanifa (XI.D)',
+      'Arya Satria Adiyasa (XI.A)',
+      'Ibnu Saddam Al-Malik (XI.B)',
+      'Mehrunisa Shanum Almahyra (X.A)',
+      'Kamilah Najah Haura Malihah Syafiq (X.B)',
+      'Naila Alya Anindya (X.D)',
+      'Kirana Raisha Alisya (X.C)',
+      'Tasmira Shakila Abidah (X.B)',
+      'Zifara Nafisa Ayuska (X.E)',
+      'Aninditya Nauril Syafina (X.C)',
+      'Muhammad Zahran Fawwaz Syihab Alfarisy (X.C)',
+      'Althaffajar Faiz Fauzan Sugiyana (X.D)',
+      'Alvin Hanif Mahendra (X.B)'
+    ]
+  },
+  2: {
+    leader: 'Aviv Rifky XI.D',
+    members: [
+      'Abel Queenshe Suryajaya (XI.D)',
+      'Angelina Setiawan (XI.A)',
+      'Nabila Oktavia (XI.B)',
+      'Aviv Rifky Permata (XI.D)',
+      'Dhika Ahmad Deriz (XI.C)',
+      'Rasheesa Kaira Ferdian (X.D)',
+      'Zaahira Suri Medianna (X.C)',
+      'Hafizah nindita putri (X.B)',
+      'Anindya Nurfauziyah (X.E)',
+      'Queen Najma Tsuwaiba (X.C)',
+      'Adzkia Kiaria Maisun Aglaia (X.D)',
+      'Alvino Kenzie (X.E)',
+      'Muhammad Fachri rizki hidayat (X.D)',
+      'Muhammad Asyraf Al faridzi (X.D)',
+      'Muhammad Nadhief Almahdi (X.B)'
+    ]
+  },
+  3: {
+    leader: 'Khazindar XI.D',
+    members: [
+      'Rabiyah Indah Lestari (XI.D)',
+      'Tengku khairani Najja Hafiz (XI.A)',
+      'Syafa Amalia Zahrani (XI.D)',
+      'Faiz Fadlurahman (XI.C)',
+      'Khazindar Ghaisan Utsmani (XI.D)',
+      'Zivana Aurora Bintang Maharani (X.E)',
+      'Nada Adenia Putri (X.B)',
+      'Aura Nara Lioni (X.B)',
+      'Adinda fitri febrianti (X.E)',
+      'Azka arsyi shafira (X.D)',
+      'AULIA SILVANA HAKIM (X.D)',
+      'M.AMIR SIDIQ (X.B)',
+      'Carda Abdillah Sodakta (X.C)',
+      'Fathan Alfarizi Wibisono (X.A)',
+      'Adib Fanani (X.A)'
+    ]
+  },
+  4: {
+    leader: 'Syahrani Chyntia Yusuf XI.C',
+    members: [
+      'Aira Muwaddatul Qalby (XI.B)',
+      'Syahrani Chyntia Yusuf (XI.C)',
+      'lingga zhafran abdillah (XI.D)',
+      'Asril Sufyan Zamil (XI.C)',
+      'Ghadiza Aorora Ramadhani (X.B)',
+      'Syalwa Nur Safitri (X.E)',
+      'Rizna Putri Nabila (X.D)',
+      'Auliya Khairunnisa (X.A)',
+      'Ghaida Nafeza Qaireen (X.C)',
+      'Heksa Ain Batrysia Tihani (X.A)',
+      'Rania Ayu Salsabila Setyoputri (X.C)',
+      'Abdul Malik Yordan (X.D)',
+      'Azka Athaya Febiano (X.C)',
+      'Soetawidjaja Hadiningrat Ardiantoro (X.C)',
+      'Queenzha Audrey Ardiansyah (X.D)'
+    ]
+  },
+  5: {
+    leader: 'Anisa Febriyani XI.D',
+    members: [
+      'Puan Ayuning Gendish (XI.B)',
+      'Anisa Febriyani (XI.D)',
+      'Kandela Aqila Wardana (XI.C)',
+      'Najwan Asyraf Muntazhar (XI.C)',
+      'Shanaz Intania Kimberly (X.B)',
+      'Velda Carita Zivani (X.D)',
+      'Khayla Annisa Muthmainah (X.E)',
+      'Fatimah Azzahra (X.E)',
+      'Tengku Khairunisa Inayya Hafiz (X.C)',
+      'Kaori Zaskia Ramadhani (X.E)',
+      'Rakha Daniswara Surya Prayogo (X.E)',
+      'Muhammad Akhtar Athahillah Putra Wahyudi (X.B)',
+      'Jazali Areca Eksan (X.E)',
+      'M.Fadhil Akbar (X.E)',
+      'Khanza Adelia Tiefany (X.A)'
+    ]
+  },
+  6: {
+    leader: 'N.R Akbar XI C',
+    members: [
+      'Eshal Ataya Ghania (XI.A)',
+      'Dzalika Al Rahma (XI.D)',
+      'Nurrochman Sidik Akbar Suyatno (XI.C)',
+      'Gerar Ghathfaan Arta Akbar (XI.B)',
+      'Kamila Khairunnisa (X.D)',
+      'Rr. Raisha adityaputri dzulqaidah (X.E)',
+      'Isna Faizatuz Zahra (X.C)',
+      'Annida shakila Arifa (X.E)',
+      'Hanami Alea Khansa (X.B)',
+      'Rifda Kamila (X.B)',
+      'Dea Nabiila Zahraa (X.A)',
+      'R. Putra Khoirul Azzam (X.D)',
+      'Kevin Putra Irawanh (X.D)',
+      'Rayinasa Aljabar (X.A)',
+      'Maritza Nabila (X.A)'
+    ]
+  }
+};
+
 function createDefaultData() {
   const data = {
     announcement: '',
@@ -202,17 +325,12 @@ function createDefaultData() {
     groups: {}
   };
   for (let i = 1; i <= 6; i++) {
-    const sName = GROUPS_CONFIG[i].shortName;
-    data.groups[String(i)] = {
-      leader: '-',
+    const gid = String(i);
+    const def = DEFAULT_GROUPS_DATA[i];
+    data.groups[gid] = {
+      leader: def.leader,
       points: 100,
-      members: [
-        `Anggota ${sName} 1`,
-        `Anggota ${sName} 2`,
-        `Anggota ${sName} 3`,
-        `Anggota ${sName} 4`,
-        `Anggota ${sName} 5`
-      ],
+      members: [...def.members],
       history: [{ time: formatTimestamp(new Date()), reason: 'Modal Awal', amount: 100 }],
       gameProgress: { stage1: false, stage2: false, themeUnlocked: false },
       gameCooldown: { wrongCount: 0, lockedUntil: null }
@@ -222,14 +340,24 @@ function createDefaultData() {
 }
 
 function initData() {
-  const existing = localStorage.getItem(STORAGE_KEY);
+  let existing = null;
+  try {
+    existing = localStorage.getItem(STORAGE_KEY);
+  } catch (e) {
+    existing = memoryStorage;
+  }
+
   if (!existing) {
     const def = createDefaultData();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(def));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(def));
+    } catch (e) {
+      memoryStorage = JSON.stringify(def);
+    }
     return def;
   }
   try {
-    const parsed = JSON.parse(existing);
+    const parsed = typeof existing === 'string' ? JSON.parse(existing) : existing;
     let updated = false;
     if (!parsed.groups) { parsed.groups = {}; updated = true; }
     if (parsed.bgImage === undefined) { parsed.bgImage = ''; updated = true; }
@@ -237,24 +365,26 @@ function initData() {
     if (!parsed.timeline || !Array.isArray(parsed.timeline)) { parsed.timeline = JSON.parse(JSON.stringify(TIMELINE_DEFAULT)); updated = true; }
     for (let i = 1; i <= 6; i++) {
       const gid = String(i);
+      const def = DEFAULT_GROUPS_DATA[i];
       if (!parsed.groups[gid]) {
         parsed.groups[gid] = {
-          leader: '-',
+          leader: def.leader,
           points: 100,
-          members: [
-            'Anggota ' + i + '-1',
-            'Anggota ' + i + '-2',
-            'Anggota ' + i + '-3',
-            'Anggota ' + i + '-4',
-            'Anggota ' + i + '-5'
-          ],
+          members: [...def.members],
           history: [{ time: formatTimestamp(new Date()), reason: 'Modal Awal', amount: 100 }],
           gameProgress: { stage1: false, stage2: false, themeUnlocked: false },
           gameCooldown: { wrongCount: 0, lockedUntil: null }
         };
         updated = true;
       } else {
-        if (parsed.groups[gid].leader === undefined) { parsed.groups[gid].leader = '-'; updated = true; }
+        if (!parsed.groups[gid].leader || parsed.groups[gid].leader === '-' || parsed.groups[gid].leader.trim() === '') {
+          parsed.groups[gid].leader = def.leader;
+          updated = true;
+        }
+        if (!Array.isArray(parsed.groups[gid].members) || parsed.groups[gid].members.length < 15 || (parsed.groups[gid].members[0] && parsed.groups[gid].members[0].startsWith('Anggota '))) {
+          parsed.groups[gid].members = [...def.members];
+          updated = true;
+        }
         if (!parsed.groups[gid].gameProgress) {
           parsed.groups[gid].gameProgress = { stage1: false, stage2: false, themeUnlocked: false };
           updated = true;
@@ -265,10 +395,19 @@ function initData() {
         }
       }
     }
-    if (updated) localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+    if (updated) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+      } catch (e) {
+        memoryStorage = JSON.stringify(parsed);
+      }
+    }
     return parsed;
   } catch (e) {
-    localStorage.removeItem(STORAGE_KEY);
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (err) {}
+    memoryStorage = null;
     return initData();
   }
 }
@@ -1410,8 +1549,8 @@ function showFinalTheme(groupId) {
             INSTRUKSI PENUGASAN TEMA INFOGRAFIS 3D
           </div>
           <ul style="margin:0 0 0 18px;font-size:0.88rem;color:#334155;line-height:1.7;">
-            <li>Susun karya Infografis 3D Berbasis Bingkai sesuai tema di atas bersama seluruh anggota kelompok.</li>
-            <li>Bedah akar permasalahan, data autentik, dan tawarkan solusi inovatif yang dapat diimplementasikan di lingkungan SMA Al Muslim.</li>
+            <li>Susun karya Infografis 3D Berbasis Bingkai sesuai tema pulau di atas bersama seluruh anggota kelompok.</li>
+            <li>Bedah keunikan budaya, filosofi kearifan lokal, dan relevansi nilai karakter pulau tersebut yang dapat diadaptasi dalam kepengurusan OSIS SMA Al Muslim.</li>
             <li>Siapkan presentasi interaktif untuk ditampilkan di hadapan panitia dan fasilitator pada <strong>15 November 2026</strong>.</li>
           </ul>
         </div>
