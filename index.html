@@ -25,11 +25,11 @@
           <p class="login-theme-text">Menjemput Talenta, Merajut Asa Bersama</p>
         </div>
 
-        <div class="login-form">
+        <form id="login-form" class="login-form" onsubmit="event.preventDefault(); login(); return false;">
           <div class="input-group">
             <label class="input-label" for="password-input">Masukkan Kata Sandi Kelompok</label>
             <div class="input-wrapper">
-              <input id="password-input" type="password" class="input-field" placeholder="Ketik kata sandi resmi..." autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();login(this.value);}">
+              <input id="password-input" type="password" class="input-field" placeholder="Ketik kata sandi resmi..." autocomplete="off">
               <button id="btn-toggle-pwd" type="button" class="input-addon" title="Tampilkan/Sembunyikan" aria-label="Toggle password visibility">
                 <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
               </button>
@@ -44,11 +44,11 @@
             </div>
           </div>
 
-          <button id="btn-login" type="button" class="btn btn-primary w-full" onclick="login(document.getElementById('password-input').value)">
+          <button id="btn-login" type="submit" class="btn btn-primary w-full">
             <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
             Masuk ke Portal
           </button>
-        </div>
+        </form>
 
         <div class="login-footer">
           OSIS SMA AL MUSLIM

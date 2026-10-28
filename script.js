@@ -169,6 +169,7 @@ const TOAST_SVGS = {
 };
 
 let currentUser = { type: null, groupId: null };
+let currentGroupId = null;
 let firestoreDb = null;
 let cloudSyncActive = false;
 let cooldownIntervals = {};
@@ -540,7 +541,15 @@ function refreshCurrentView() {
   }
 }
 
-function login(password) {
+function login(pwdArg) {
+  let password = typeof pwdArg === 'string' ? pwdArg : '';
+  if (!password) {
+    const pwdEl = document.getElementById('password-input');
+    if (pwdEl && typeof pwdEl.value === 'string') {
+      password = pwdEl.value;
+    }
+  }
+
   const errBox = document.getElementById('login-error');
   if (!password || !password.trim()) {
     if (errBox) {
@@ -555,6 +564,7 @@ function login(password) {
 
   if (clean === ADMIN_PASSWORD) {
     currentUser = { type: 'admin', groupId: null };
+    currentGroupId = null;
     if (errBox) errBox.style.display = 'none';
     renderAdmin();
     showPage('page-admin');
@@ -566,6 +576,7 @@ function login(password) {
     if (clean === config.password.toUpperCase()) {
       const gId = parseInt(idStr, 10);
       currentUser = { type: 'group', groupId: gId };
+      currentGroupId = gId;
       if (errBox) errBox.style.display = 'none';
       renderDashboard(gId);
       showPage('page-dashboard');
@@ -574,13 +585,18 @@ function login(password) {
     }
   }
 
-  if (errBox) errBox.style.display = 'flex';
+  if (errBox) {
+    errBox.style.display = 'flex';
+    const msg = errBox.querySelector('p');
+    if (msg) msg.textContent = 'Kata sandi tidak valid. Silakan periksa kembali kata sandi resmi dari panitia.';
+  }
   showToast('Kata sandi tidak valid!', 'error');
   return false;
 }
 
 function logout() {
   currentUser = { type: null, groupId: null };
+  currentGroupId = null;
   const pwd = document.getElementById('password-input');
   if (pwd) pwd.value = '';
   const errBox = document.getElementById('login-error');
@@ -607,6 +623,7 @@ function renderDashboard(groupId) {
   const config = GROUPS_CONFIG[groupId];
   if (!config) return;
 
+  currentGroupId = groupId;
   const grp = data.groups[String(groupId)] || {};
 
   const nameEl = document.getElementById('dash-group-name');
@@ -622,7 +639,7 @@ function renderDashboard(groupId) {
   if (facProfEl) facProfEl.textContent = config.facilitator;
 
   renderAnnouncement(data);
-  updateDashboardBrankasCard(data);
+  updateDashboardBrankasCard(data, groupId);
   renderTimeline(data);
   renderLeaderboard(data);
   renderPointHistory(data, groupId);
@@ -658,15 +675,15 @@ function renderAnnouncement(data) {
 
 function renderCountdown() {}
 
-function updateDashboardBrankasCard(data) {
+function updateDashboardBrankasCard(data, groupId) {
   const badge = document.getElementById('dash-brankas-status-badge');
   const text = document.getElementById('dash-brankas-status-text');
   const btnLabel = document.getElementById('btn-open-game-main-label');
   if (!badge || !text) return;
 
-  const gid = currentGroupId ? String(currentGroupId) : (currentUser && currentUser.groupId ? String(currentUser.groupId) : '1');
+  const gid = String(groupId || currentGroupId || (currentUser && currentUser.groupId) || 1);
   const grp = data && data.groups ? data.groups[gid] : null;
-  const isSolved = grp && grp.gameProgress && grp.gameProgress.stage2Solved;
+  const isSolved = Boolean(grp && grp.gameProgress && (grp.gameProgress.stage2 || grp.gameProgress.themeUnlocked));
   const isUnlocked = Boolean(data && data.brankasUnlocked);
 
   badge.className = 'game-status-badge';
@@ -1640,24 +1657,28 @@ function bootApp() {
   showPage('page-login');
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', bootApp);
-} else {
-  bootApp();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
+function attachEventListeners() {
+  const loginForm = document.getElementById('login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      login();
+    });
+  }
 
   const btnLogin = document.getElementById('btn-login');
   const pwdInput = document.getElementById('password-input');
-  if (btnLogin && pwdInput) {
-    btnLogin.addEventListener('click', () => {
-      login(pwdInput.value);
+  if (btnLogin) {
+    btnLogin.addEventListener('click', (e) => {
+      e.preventDefault();
+      login();
     });
+  }
+  if (pwdInput) {
     pwdInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        login(pwdInput.value);
+        login();
       }
     });
   }
@@ -1925,9 +1946,23 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
-});
+}
+
+function initApp() {
+  bootApp();
+  attachEventListeners();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
+
 window.login = login;
 window.logout = logout;
 window.showPage = showPage;
 window.backToDashboard = backToDashboard;
 window.adminToggleBrankasAccess = adminToggleBrankasAccess;
+window.initApp = initApp;
+window.bootApp = bootApp;
