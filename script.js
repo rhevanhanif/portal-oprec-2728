@@ -2,12 +2,12 @@ const STORAGE_KEY = 'portalRayaKarsaPasundan_v2';
 const FIREBASE_CONFIG_KEY = 'portal_firebase_custom_config';
 
 const DEFAULT_FIREBASE_CONFIG = {
-  apiKey: "AIzaSy_YOUR_API_KEY_HERE",
-  authDomain: "portal-raya-karsa-pasundan.firebaseapp.com",
-  projectId: "portal-raya-karsa-pasundan",
-  storageBucket: "portal-raya-karsa-pasundan.appspot.com",
-  messagingSenderId: "123456789012",
-  appId: "1:123456789012:web:abcdef1234567890"
+  apiKey: "AIzaSyDDkQELsnLuYzttGwlkkHthcCNlwfw6Ujg",
+  authDomain: "oprec-osis.firebaseapp.com",
+  projectId: "oprec-osis",
+  storageBucket: "oprec-osis.firebasestorage.app",
+  messagingSenderId: "849085077469",
+  appId: "1:849085077469:web:42395f62bf2a85f6d10834"
 };
 
 const GROUPS_CONFIG = {
@@ -466,15 +466,20 @@ function getFirebaseConfig() {
   return DEFAULT_FIREBASE_CONFIG;
 }
 
+function getLocalCloudLabel() {
+  const isOnline = typeof navigator !== 'undefined' ? navigator.onLine : true;
+  return isOnline ? 'Online (Mode Lokal)' : 'Luring (Mode Lokal)';
+}
+
 function initFirebase() {
   if (typeof firebase === 'undefined') {
-    updateCloudStatusUI(false, 'Mode Lokal (SDK Terputus)');
+    updateCloudStatusUI(false, getLocalCloudLabel());
     return;
   }
 
   const config = getFirebaseConfig();
   if (!config || !config.apiKey || config.apiKey.includes('YOUR_API_KEY')) {
-    updateCloudStatusUI(false, 'Mode Lokal (Offline Ready)');
+    updateCloudStatusUI(false, getLocalCloudLabel());
     return;
   }
 
@@ -499,10 +504,10 @@ function initFirebase() {
         updateCloudStatusUI(true, 'Cloud Terhubung');
       }
     }, () => {
-      updateCloudStatusUI(false, 'Mode Lokal (Offline)');
+      updateCloudStatusUI(false, getLocalCloudLabel());
     });
   } catch (err) {
-    updateCloudStatusUI(false, 'Mode Lokal');
+    updateCloudStatusUI(false, getLocalCloudLabel());
   }
 }
 
@@ -698,7 +703,7 @@ function updateDashboardBrankasCard(data, groupId) {
   } else {
     badge.classList.add('status-locked');
     text.textContent = 'Akses Menunggu Instruksi Resmi Panitia';
-    if (btnLabel) btnLabel.textContent = 'Buka Misi Brankas Resolusi';
+    if (btnLabel) btnLabel.textContent = 'Buka Brankas Tema Infografis';
   }
 }
 
@@ -1151,9 +1156,9 @@ function adminToggleBrankasAccess() {
   saveData(data);
   updateAdminBrankasToggleUI(data);
   if (data.brankasUnlocked) {
-    showToast('Akses Brankas Resolusi Konflik berhasil DIBUKA untuk seluruh peserta!', 'success');
+    showToast('Akses Brankas Tema Infografis berhasil DIBUKA untuk seluruh peserta!', 'success');
   } else {
-    showToast('Akses Brankas Resolusi Konflik berhasil DIKUNCI kembali.', 'info');
+    showToast('Akses Brankas Tema Infografis berhasil DIKUNCI kembali.', 'info');
   }
 }
 
@@ -1375,7 +1380,7 @@ function showLockedGame(groupId) {
       </div>
       <h3 class="game-locked-title">Akses Penugasan Belum Dibuka</h3>
       <p class="game-locked-desc">
-        Silakan menunggu instruksi resmi dari Panitia untuk memulai penyelesaian Brankas Resolusi Konflik.
+        Silakan menunggu instruksi resmi dari Panitia untuk memulai penyelesaian Brankas Tema Infografis.
       </p>
       <button id="btn-locked-back-dash" class="btn btn-primary" style="margin-top:24px;">
         ${SVG.arrowRight}
@@ -1647,6 +1652,18 @@ function showToast(message, type) {
 window.addEventListener('storage', (e) => {
   if (e.key === STORAGE_KEY) {
     refreshCurrentView();
+  }
+});
+
+window.addEventListener('online', () => {
+  if (!cloudSyncActive) {
+    updateCloudStatusUI(false, 'Online (Mode Lokal)');
+  }
+});
+
+window.addEventListener('offline', () => {
+  if (!cloudSyncActive) {
+    updateCloudStatusUI(false, 'Luring (Mode Lokal)');
   }
 });
 
