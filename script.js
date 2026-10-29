@@ -11,12 +11,12 @@ const DEFAULT_FIREBASE_CONFIG = {
 };
 
 const GROUPS_CONFIG = {
-  1: { name: 'Kelompok 1 — SAWALA', shortName: 'SAWALA', facilitator: 'Muh Naufal Rifqi', password: 'INTEGRITAS24' },
-  2: { name: 'Kelompok 2 — RANCAGE', shortName: 'RANCAGE', facilitator: 'Andini Hanum Ratna Duhita', password: 'NUSANTARA57' },
-  3: { name: 'Kelompok 3 — INOHONG', shortName: 'INOHONG', facilitator: 'Radhwa Fadya Prameswari', password: 'KOLABORASI83' },
-  4: { name: 'Kelompok 4 — WIDYA', shortName: 'WIDYA', facilitator: 'Khansa Angelina Athaya', password: 'PANCASILA46' },
-  5: { name: 'Kelompok 5 — PANGESTU', shortName: 'PANGESTU', facilitator: 'Benafatin Wiradni Badawi', password: 'SOLIDARITAS79' },
-  6: { name: 'Kelompok 6 — JAWARA', shortName: 'JAWARA', facilitator: 'Muhammad Dani', password: 'PATRIOTISME35' }
+  1: { name: 'Kelompok 1 — SAWALA', shortName: 'SAWALA', facilitator: 'Muh Naufal Rifqi', password: 'SAGARA88' },
+  2: { name: 'Kelompok 2 — RANCAGE', shortName: 'RANCAGE', facilitator: 'Andini Hanum Ratna Duhita', password: 'BARAYA45' },
+  3: { name: 'Kelompok 3 — INOHONG', shortName: 'INOHONG', facilitator: 'Radhwa Fadya Prameswari', password: 'NAGARA17' },
+  4: { name: 'Kelompok 4 — WIDYA', shortName: 'WIDYA', facilitator: 'Khansa Angelina Athaya', password: 'PALAPA28' },
+  5: { name: 'Kelompok 5 — PANGESTU', shortName: 'PANGESTU', facilitator: 'Benafatin Wiradni Badawi', password: 'CAHAYA99' },
+  6: { name: 'Kelompok 6 — JAWARA', shortName: 'JAWARA', facilitator: 'Muhammad Dani', password: 'BATARA77' }
 };
 
 const ADMIN_PASSWORD = 'KARSA94ADMIN28';
@@ -520,11 +520,9 @@ function refreshCurrentView() {
 
 function login(pwdArg) {
   let password = typeof pwdArg === 'string' ? pwdArg : '';
-  if (!password) {
-    const pwdEl = document.getElementById('password-input');
-    if (pwdEl && typeof pwdEl.value === 'string') {
-      password = pwdEl.value;
-    }
+  const pwdEl = document.getElementById('password-input');
+  if (!password && pwdEl && typeof pwdEl.value === 'string') {
+    password = pwdEl.value;
   }
 
   const errBox = document.getElementById('login-error');
@@ -535,13 +533,19 @@ function login(pwdArg) {
       if (msg) msg.textContent = 'Silakan ketik kata sandi resmi terlebih dahulu.';
     }
     showToast('Ketik kata sandi terlebih dahulu!', 'error');
+    if (pwdEl) pwdEl.focus();
     return false;
   }
+
   const clean = password.trim().toUpperCase();
 
   if (clean === ADMIN_PASSWORD) {
     currentUser = { type: 'admin', groupId: null };
     currentGroupId = null;
+    if (pwdEl) {
+      pwdEl.value = '';
+      pwdEl.blur();
+    }
     if (errBox) errBox.style.display = 'none';
     renderAdmin();
     showPage('page-admin');
@@ -554,6 +558,10 @@ function login(pwdArg) {
       const gId = parseInt(idStr, 10);
       currentUser = { type: 'group', groupId: gId };
       currentGroupId = gId;
+      if (pwdEl) {
+        pwdEl.value = '';
+        pwdEl.blur();
+      }
       if (errBox) errBox.style.display = 'none';
       renderDashboard(gId);
       showPage('page-dashboard');
@@ -568,6 +576,10 @@ function login(pwdArg) {
     if (msg) msg.textContent = 'Kata sandi tidak valid. Silakan periksa kembali kata sandi resmi dari panitia.';
   }
   showToast('Kata sandi tidak valid!', 'error');
+  if (pwdEl) {
+    pwdEl.focus();
+    pwdEl.select();
+  }
   return false;
 }
 
