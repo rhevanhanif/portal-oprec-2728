@@ -733,9 +733,7 @@ function renderLeaderboard(data) {
   let html = '';
   sorted.forEach((item, idx) => {
     const rank = idx + 1;
-    const rankBadge = `<span class="mono-font">${rank < 10 ? '0' + rank : rank}</span>`; else {
-      rankBadge = `<span class="mono-font">${rank}</span>`;
-    }
+    const rankBadge = `<span class="mono-font">${rank < 10 ? '0' + rank : rank}</span>`;
 
     const isRank1 = rank === 1;
     html += `
