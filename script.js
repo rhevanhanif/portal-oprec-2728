@@ -137,36 +137,8 @@ const GAME_STAGE2_CODES = {
   6: { give: 'KARSA63', receive: 'SILIWANGI36', partner: 3 }
 };
 
-const SVG = {
-  check: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>',
-  checkCircle: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>',
-  alertCircle: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>',
-  alertTriangle: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>',
-  flame: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>',
-  clock: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>',
-  lock: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>',
-  unlock: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>',
-  shield: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>',
-  plus: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>',
-  trash: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>',
-  arrowRight: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>',
-  send: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>',
-  award: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>',
-  fileText: '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>'
-};
-
-const MEDAL_SVGS = {
-  1: '<svg class="icon-svg icon-svg-md" viewBox="0 0 24 24" fill="#D97706" stroke="#D97706" stroke-width="1.5"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>',
-  2: '<svg class="icon-svg icon-svg-md" viewBox="0 0 24 24" fill="#64748B" stroke="#64748B" stroke-width="1.5"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>',
-  3: '<svg class="icon-svg icon-svg-md" viewBox="0 0 24 24" fill="#B45309" stroke="#B45309" stroke-width="1.5"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>'
-};
-
-const EMPTY_STATE_SVG = '<svg class="empty-state-svg" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" fill="none"><ellipse cx="60" cy="65" rx="40" ry="18" fill="#BAE6FD" opacity="0.5"/><ellipse cx="35" cy="52" rx="24" ry="16" fill="#E0F2FE" opacity="0.7"/><ellipse cx="80" cy="52" rx="26" ry="17" fill="#E0F2FE" opacity="0.7"/><path d="M50 38 L60 18 L70 38" stroke="#0284C7" stroke-width="2" opacity="0.3"/><path d="M45 38 L60 10 L75 38" stroke="#0284C7" stroke-width="1.5" opacity="0.2"/><rect x="48" y="38" width="24" height="16" rx="2" stroke="#0284C7" stroke-width="1.5" opacity="0.3"/></svg>';
-
-const TOAST_SVGS = {
-  success: '<svg class="icon-svg icon-svg-md" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>',
-  error: '<svg class="icon-svg icon-svg-md" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>'
-};
+const SVG_EYE = '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+const SVG_EYE_OFF = '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
 
 let currentUser = { type: null, groupId: null };
 let currentGroupId = null;
@@ -660,7 +632,6 @@ function renderAnnouncement(data) {
     container.innerHTML = `
       <div class="announcement-banner">
         <span class="announcement-badge">
-          ${SVG.alertCircle}
           PENGUMUMAN RESMI AKTIF
         </span>
         <div class="announcement-text">${escapeHtml(data.announcement).replace(/\n/g, '<br>')}</div>
@@ -669,7 +640,6 @@ function renderAnnouncement(data) {
   } else {
     container.innerHTML = `
       <div class="empty-state">
-        ${EMPTY_STATE_SVG}
         <div class="empty-state-text">
           Belum ada pengumuman resmi terbaru dari Panitia saat ini. Tetap jaga kekompakan dan pantau jadwal kegiatan secara berkala.
         </div>
@@ -720,12 +690,12 @@ function renderTimeline(data) {
 
     if (step.status === 'done') {
       nodeClass = 'timeline-node done';
-      badgeHtml = `<span class="timeline-step-status status-done">${SVG.check} Selesai</span>`;
+      badgeHtml = '<span class="timeline-step-status status-done">Selesai</span>';
     } else if (step.status === 'active') {
       nodeClass = 'timeline-node active';
-      badgeHtml = `<span class="timeline-step-status status-active">${SVG.flame} Sedang Berlangsung</span>`;
+      badgeHtml = '<span class="timeline-step-status status-active">Sedang Berlangsung</span>';
     } else {
-      badgeHtml = `<span class="timeline-step-status status-upcoming">${SVG.clock} ${escapeHtml(step.date || 'Coming Soon')}</span>`;
+      badgeHtml = `<span class="timeline-step-status status-upcoming">${escapeHtml(step.date || 'Coming Soon')}</span>`;
     }
 
     html += `
@@ -763,10 +733,7 @@ function renderLeaderboard(data) {
   let html = '';
   sorted.forEach((item, idx) => {
     const rank = idx + 1;
-    let rankBadge = '';
-    if (rank <= 3) {
-      rankBadge = MEDAL_SVGS[rank];
-    } else {
+    const rankBadge = `<span class="mono-font">${rank < 10 ? '0' + rank : rank}</span>`; else {
       rankBadge = `<span class="mono-font">${rank}</span>`;
     }
 
@@ -984,8 +951,7 @@ function adminRenderMembersForGroup(groupId) {
         <span id="admin-member-count" class="badge badge-blue">${members.length} Siswa</span>
       </div>
       <button type="button" id="btn-add-member" class="btn btn-secondary btn-small">
-        ${SVG.plus}
-        <span>Tambah Anggota</span>
+        <span>+ Tambah Anggota</span>
       </button>
     </div>
     <div id="admin-members-list" class="admin-members-list">
@@ -1004,7 +970,7 @@ function adminRenderMembersForGroup(groupId) {
           <span class="member-row-num">${idx + 1}</span>
           <input type="text" class="input-field admin-member-input" value="${escapeHtml(m)}" placeholder="Nama lengkap siswa...">
           <button type="button" class="btn-del-member" title="Hapus Anggota" aria-label="Hapus Anggota">
-            ${SVG.trash}
+            &times;
           </button>
         </div>
       `;
@@ -1014,8 +980,7 @@ function adminRenderMembersForGroup(groupId) {
   html += `
     </div>
     <button type="button" id="btn-add-member-bottom" class="btn btn-ghost w-full mb-2">
-      ${SVG.plus}
-      <span>Tambah Baris Anggota Baru</span>
+      <span>+ Tambah Baris Anggota Baru</span>
     </button>
   `;
 
@@ -1036,7 +1001,7 @@ function adminAddMemberRow(name = '') {
     <span class="member-row-num">${newIndex}</span>
     <input type="text" class="input-field admin-member-input" value="${escapeHtml(name)}" placeholder="Nama lengkap siswa...">
     <button type="button" class="btn-del-member" title="Hapus Anggota" aria-label="Hapus Anggota">
-      ${SVG.trash}
+      &times;
     </button>
   `;
   list.appendChild(row);
@@ -1141,12 +1106,12 @@ function updateAdminBrankasToggleUI(data) {
     card.classList.add('access-open');
     label.textContent = 'Status Akses Brankas: Terbuka (Peserta Dapat Mengakses)';
     btn.className = 'btn btn-danger';
-    btn.innerHTML = `${SVG.lock}<span>Kunci Kembali Akses Brankas</span>`;
+    btn.innerHTML = '<span>Kunci Kembali Akses Brankas</span>';
   } else {
     card.classList.remove('access-open');
     label.textContent = 'Status Akses Brankas: Terkunci (Peserta Belum Dapat Mengakses)';
     btn.className = 'btn btn-primary';
-    btn.innerHTML = `${SVG.unlock}<span>Buka Akses Brankas untuk Peserta</span>`;
+    btn.innerHTML = '<span>Buka Akses Brankas untuk Peserta</span>';
   }
 }
 
@@ -1241,17 +1206,11 @@ function adminResetAllGames() {
   const btn = document.getElementById('btn-reset-all-games');
   if (btn && btn.getAttribute('data-confirm') !== '1') {
     btn.setAttribute('data-confirm', '1');
-    btn.innerHTML = `
-      ${SVG.alertTriangle}
-      Konfirmasi: Klik Sekali Lagi untuk Reset Semua Progres
-    `;
+    btn.innerHTML = 'Konfirmasi: Klik Sekali Lagi untuk Reset Semua Progres';
     setTimeout(() => {
       if (btn.getAttribute('data-confirm') === '1') {
         btn.setAttribute('data-confirm', '0');
-        btn.innerHTML = `
-          ${SVG.alertTriangle}
-          Reset Semua Progres Game (Kelompok 1 &ndash; 6)
-        `;
+        btn.innerHTML = 'Reset Semua Progres Game (Kelompok 1 &ndash; 6)';
       }
     }, 4000);
     showToast('Klik sekali lagi tombol merah untuk konfirmasi reset semua kelompok.', 'error');
@@ -1260,10 +1219,7 @@ function adminResetAllGames() {
 
   if (btn) {
     btn.setAttribute('data-confirm', '0');
-    btn.innerHTML = `
-      ${SVG.alertTriangle}
-      Reset Semua Progres Game (Kelompok 1 &ndash; 6)
-    `;
+    btn.innerHTML = 'Reset Semua Progres Game (Kelompok 1 &ndash; 6)';
   }
 
   const data = getData();
@@ -1375,15 +1331,11 @@ function showLockedGame(groupId) {
 
   container.innerHTML = `
     <div class="card game-card game-locked-card">
-      <div class="game-locked-icon">
-        ${SVG.lock}
-      </div>
       <h3 class="game-locked-title">Akses Penugasan Belum Dibuka</h3>
       <p class="game-locked-desc">
         Silakan menunggu instruksi resmi dari Panitia untuk memulai penyelesaian Brankas Tema Infografis.
       </p>
       <button id="btn-locked-back-dash" class="btn btn-primary" style="margin-top:24px;">
-        ${SVG.arrowRight}
         Kembali ke Dashboard Kelompok
       </button>
     </div>
@@ -1416,7 +1368,6 @@ function showStage1(groupId) {
     formOrCooldownHtml = `
       <div class="game-cooldown">
         <div style="display:flex;align-items:center;justify-content:center;gap:8px;color:#E11D48;font-weight:700;">
-          ${SVG.alertTriangle}
           AKSES INPUT DITANGGUHKAN SEMENTARA
         </div>
         <div class="game-cooldown-timer mono-font" id="stage1-cooldown-timer">${cd.remainingSeconds}s</div>
@@ -1445,7 +1396,6 @@ function showStage1(groupId) {
         <div id="stage1-feedback" style="margin-bottom:14px;font-size:0.9rem;font-weight:600;"></div>
 
         <button type="submit" class="btn btn-primary w-full">
-          ${SVG.send}
           Verifikasi Jawaban Matriks
         </button>
       </form>
@@ -1491,7 +1441,6 @@ function showStage2(groupId) {
     formOrCooldownHtml = `
       <div class="game-cooldown">
         <div style="display:flex;align-items:center;justify-content:center;gap:8px;color:#E11D48;font-weight:700;">
-          ${SVG.alertTriangle}
           AKSES OTORISASI DITANGGUHKAN SEMENTARA
         </div>
         <div class="game-cooldown-timer mono-font" id="stage2-cooldown-timer">${cd.remainingSeconds}s</div>
@@ -1520,8 +1469,7 @@ function showStage2(groupId) {
         <div id="stage2-feedback" style="margin-bottom:14px;font-size:0.9rem;font-weight:600;"></div>
 
         <button type="submit" class="btn btn-primary w-full">
-          ${SVG.unlock}
-          Buka Segel Tema Infografis 3D
+          Buka Segel Tema Infografis
         </button>
       </form>
     `;
@@ -1530,12 +1478,11 @@ function showStage2(groupId) {
   container.innerHTML = `
     <div class="card game-card">
       <div class="game-success" style="margin-bottom:20px;text-align:left;">
-        <div style="display:flex;align-items:center;gap:8px;font-weight:800;color:#065F46;margin-bottom:4px;">
-          ${SVG.checkCircle}
+        <div style="font-weight:800;color:#065F46;margin-bottom:4px;">
           Analisis Logis Tahap 1 Dinyatakan Akurat!
         </div>
         <p style="font-size:0.88rem;color:#047857;line-height:1.6;">
-          Matriks internal kelompok Anda telah diverifikasi valid. Untuk membuka segel berkas Tema Infografis 3D, diperlukan Kunci Otorisasi Silang yang dipegang oleh kelompok mitra Anda.
+          Matriks internal kelompok Anda telah diverifikasi valid. Untuk membuka segel berkas Tema Infografis, diperlukan Kunci Otorisasi Silang yang dipegang oleh kelompok mitra Anda.
         </p>
       </div>
 
@@ -1566,25 +1513,17 @@ function showFinalTheme(groupId) {
 
   const theme = GAME_THEMES[groupId] || {
     title: 'Tema Resmi Open Recruitment OSIS',
-    desc: 'Deskripsi tema kegiatan infografis 3D.'
+    desc: 'Deskripsi tema kegiatan infografis.'
   };
 
   container.innerHTML = `
     <div class="card game-card">
       <div class="game-final-card">
-        <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#D97706,#F59E0B);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 8px 24px rgba(217,119,6,0.25);">
-          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="36" height="36">
-            <circle cx="12" cy="8" r="7"></circle>
-            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
-          </svg>
-        </div>
-
-        <div style="display:inline-flex;align-items:center;gap:6px;background:#D1FAE5;color:#065F46;font-size:0.75rem;font-weight:800;letter-spacing:1px;padding:4px 14px;border-radius:20px;margin-bottom:12px;">
-          ${SVG.checkCircle}
+        <div class="theme-unlocked-badge">
           SEGEL RESMI DIBUKA &bull; TEMA INFOGRAFIS TERBUKA PERMANEN
         </div>
 
-        <div style="font-size:0.85rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;">
+        <div class="game-theme-group-label">
           ${escapeHtml(GROUPS_CONFIG[groupId].name)} &mdash; OSIS SMA AL MUSLIM 2027/2028
         </div>
 
@@ -1596,20 +1535,7 @@ function showFinalTheme(groupId) {
           ${escapeHtml(theme.desc)}
         </p>
 
-        <div style="background:#FFFFFF;border:1px solid #CBD5E1;border-radius:14px;padding:18px 20px;text-align:left;margin:24px 0 20px;">
-          <div style="font-size:0.8rem;font-weight:800;color:#0284C7;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:6px;">
-            ${SVG.fileText}
-            INSTRUKSI PENUGASAN TEMA INFOGRAFIS 3D
-          </div>
-          <ul style="margin:0 0 0 18px;font-size:0.88rem;color:#334155;line-height:1.7;">
-            <li>Susun karya Infografis 3D Berbasis Bingkai sesuai tema pulau di atas bersama seluruh anggota kelompok.</li>
-            <li>Bedah keunikan budaya, filosofi kearifan lokal, dan relevansi nilai karakter pulau tersebut yang dapat diadaptasi dalam kepengurusan OSIS SMA Al Muslim.</li>
-            <li>Siapkan presentasi interaktif untuk ditampilkan di hadapan panitia dan fasilitator pada <strong>15 November 2026</strong>.</li>
-          </ul>
-        </div>
-
-        <button id="btn-theme-back-dash" class="btn btn-primary w-full">
-          ${SVG.arrowRight}
+        <button id="btn-theme-back-dash" class="btn btn-primary w-full" style="margin-top:28px;">
           Kembali ke Dashboard Kelompok
         </button>
       </div>
@@ -1632,8 +1558,7 @@ function showToast(message, type) {
 
   const toast = document.createElement('div');
   toast.className = `toast toast-${type === 'error' ? 'error' : 'success'}`;
-  const iconSvg = type === 'error' ? TOAST_SVGS.error : TOAST_SVGS.success;
-  toast.innerHTML = `${iconSvg}<span>${escapeHtml(message)}</span>`;
+  toast.innerHTML = `<span>${escapeHtml(message)}</span>`;
 
   container.appendChild(toast);
 
@@ -1705,9 +1630,7 @@ function attachEventListeners() {
     btnTogglePwd.addEventListener('click', () => {
       const isPwd = pwdInput.type === 'password';
       pwdInput.type = isPwd ? 'text' : 'password';
-      btnTogglePwd.innerHTML = isPwd
-        ? '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>'
-        : '<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+      btnTogglePwd.innerHTML = isPwd ? SVG_EYE_OFF : SVG_EYE;
     });
   }
 
@@ -1901,7 +1824,7 @@ function attachEventListeners() {
         const data = getData();
         data.groups[String(gid)].gameProgress.stage1 = true;
         saveData(data);
-        if (fb) fb.innerHTML = '<span class="point-positive">' + SVG.check + ' Analisis Logika Akurat! Membuka Tahap 2 (Silih Asuh)...</span>';
+        if (fb) fb.innerHTML = '<span class="point-positive">Analisis Logika Akurat! Membuka Tahap 2 (Silih Asuh)...</span>';
         showToast('Analisis logika akurat! Membuka Tahap 2...', 'success');
         setTimeout(() => {
           showStage2(gid);
@@ -1913,7 +1836,7 @@ function attachEventListeners() {
           showStage1(gid);
         } else {
           const left = 3 - newCd.wrongCount;
-          if (fb) fb.innerHTML = `<span class="point-negative">${SVG.alertCircle} Analisis belum tepat. Silakan teliti kembali petunjuk matriks. Sisa kesempatan: ${left}/3.</span>`;
+          if (fb) fb.innerHTML = `<span class="point-negative">Analisis belum tepat. Silakan teliti kembali petunjuk matriks. Sisa kesempatan: ${left}/3.</span>`;
           showToast(`Jawaban salah! Sisa kesempatan: ${left}/3`, 'error');
         }
       }
@@ -1944,7 +1867,7 @@ function attachEventListeners() {
         data.groups[String(gid)].gameProgress.stage2 = true;
         data.groups[String(gid)].gameProgress.themeUnlocked = true;
         saveData(data);
-        if (fb) fb.innerHTML = '<span class="point-positive">' + SVG.check + ' Kunci Otorisasi Cocok! Membuka Segel Tema Infografis 3D...</span>';
+        if (fb) fb.innerHTML = '<span class="point-positive">Kunci Otorisasi Cocok! Membuka Segel Tema Infografis Terbuka Permanen...</span>';
         showToast('Otorisasi silang berhasil! Tema Infografis Terbuka!', 'success');
         setTimeout(() => {
           showFinalTheme(gid);
@@ -1957,7 +1880,7 @@ function attachEventListeners() {
           showStage2(gid);
         } else {
           const left = 3 - newCd.wrongCount;
-          if (fb) fb.innerHTML = `<span class="point-negative">${SVG.alertCircle} Kunci tidak cocok. Pastikan meminta kode dari perwakilan ${escapeHtml(partnerName)}. Sisa kesempatan: ${left}/3.</span>`;
+          if (fb) fb.innerHTML = `<span class="point-negative">Kunci tidak cocok. Pastikan meminta kode dari perwakilan ${escapeHtml(partnerName)}. Sisa kesempatan: ${left}/3.</span>`;
           showToast(`Kunci tidak cocok! Sisa kesempatan: ${left}/3`, 'error');
         }
       }
